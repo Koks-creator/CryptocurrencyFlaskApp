@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            <div class="card p-2 p-3 mb-2 bg-dark text-white">
+
+                <h1>Api Documentation</h1>
+                <br>
+                <br>
+                <p><font size="5">This is short API documentation. Here you can get information such as price, market capitalisation,
+                    circulating supply, change percentage, high 24, low 24.<br>You need to get a key to use this API (it's for free!). If you don't have
+                one just click this <a href="{{url_for('api')}}">here</a>.<br>Have fun!</font></p>
+                <br>
+                <h2>Available methods</h2>
+                <ul>
+                    <li><font size="5">General information of all available crypto currencies and its parameters</font></li>
+                    <ul>
+                        <li><font size="5">vs_currency - currency</font></li>
+                    </ul>
+                   <p><font size="5">Example: https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd<br>Example result:</font></p>
+                  <pre class="text-white">
+[
+  {
+    "id": "bitcoin",
+    "symbol": "btc",
+    "name": "Bitcoin",
+    "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+    "current_price": 10585.14,
+    "market_cap": 196113498363,
+    "market_cap_rank": 1,
+    "fully_diluted_valuation": 222498661006,
+    "total_volume": 18893742735,
+    "high_24h": 10794.76,
+    "low_24h": 10546.87,
+    "price_change_24h": -146.98409828,
+    "price_change_percentage_24h": -1.36957,
+    "market_cap_change_24h": -2398777475.947754,
+    "market_cap_change_percentage_24h": -1.20838,
+    "circulating_supply": 18509700.0,
+    "total_supply": 21000000.0,
+    "max_supply": 21000000.0,
+    "ath": 19665.39,
+    "ath_change_percentage": -46.17377,
+    "ath_date": "2017-12-16T00:00:00.000Z",
+    "atl": 67.81,
+    "atl_change_percentage": 15510.22954,
+    "atl_date": "2013-07-06T00:00:00.000Z",
+    "roi": null,
+    "last_updated": "2020-10-06T19:20:13.907Z"
+  },
+  {
+    "id": "ethereum",
+    "symbol": "eth",
+    "name": "Ethereum",
+    "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880",
+    "current_price": 341.89,
+    "market_cap": 38650985965,
+    "market_cap_rank": 2,
+    "fully_diluted_valuation": null,
+    "total_volume": 9647896219,
+    "high_24h": 354.53,
+    "low_24h": 341.24,
+    "price_change_24h": -10.14321008,
+    "price_change_percentage_24h": -2.88129,
+    "market_cap_change_24h": -1056612058.1717604,
+    "market_cap_change_percentage_24h": -2.66098,
+    "circulating_supply": 112898242.1865,
+    "total_supply": null,
+    "max_supply": null,
+    "ath": 1448.18,
+    "ath_change_percentage": -76.35982,
+    "ath_date": "2018-01-13T00:00:00.000Z",
+    "atl": 0.432979,
+    "atl_change_percentage": 78969.13106,
+    "atl_date": "2015-10-20T00:00:00.000Z",
+    "roi": {
+      "times": 42.210851874556624,
+      "currency": "btc",
+      "percentage": 4221.085187455662
+    },
+    "last_updated": "2020-10-06T19:21:09.544Z"
+  },
+    ...
+]
+                  </pre>
+                    <li><font size="5">General information about single crypto currency and its parameters</font></li>
+                        <ul>
+                            <li><font size="5">vs_currency - currency</font></li>
+                            <li><font size="5">ids - id of a crypto currency ("bitcoin" for example)</font></li>
+                        </ul>
+                    <p><font size="5">Example: https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin<br>Example result:</font></p>
+                    <pre class="text-white">
+[
+  {
+    "id": "bitcoin",
+    "symbol": "btc",
+    "name": "Bitcoin",
+    "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+    "current_price": 10880.52,
+    "market_cap": 201232046824,
+    "market_cap_rank": 1,
+    "fully_diluted_valuation": 228284363532,
+    "total_volume": 19020985662,
+    "high_24h": 10887.0,
+    "low_24h": 10552.77,
+    "price_change_24h": 250.3,
+    "price_change_percentage_24h": 2.35462,
+    "market_cap_change_24h": 4503809491,
+    "market_cap_change_percentage_24h": 2.28936,
+    "circulating_supply": 18511443.0,
+    "total_supply": 21000000.0,
+    "max_supply": 21000000.0,
+    "ath": 19665.39,
+    "ath_change_percentage": -44.8194,
+    "ath_date": "2017-12-16T00:00:00.000Z",
+    "atl": 67.81,
+    "atl_change_percentage": 15903.01186,
+    "atl_date": "2013-07-06T00:00:00.000Z",
+    "roi": null,
+    "last_updated": "2020-10-08T14:52:08.495Z"
+  }
+]
+                    </pre>
+               </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

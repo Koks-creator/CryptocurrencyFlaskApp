@@ -1,0 +1,517 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div>
+<div class="container mt-5 " >
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10" >
+            <div class="card p-2 text-center p-3 mb-2 bg-dark text-white">
+                <div class="row">
+                    <div class="col-md-7 border-right no-gutters">
+                          <div class="py-3"><img src="{{ api_single[0]['image'] }}" width="100" class="">
+                            <h3 class="">{{ api_single[0]['name'] }} ({{ api_single[0]['symbol'].upper() }})</h3>
+                            <h4>Current price: {{ api_single[0]['current_price'] }} USD</h4>
+                        <div align="left">
+                        </div>
+                            <div class="stats">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex flex-column"><font color="white"><span class="text-left head"><strong>Market capitalisation</strong></span> <span class="text-left bottom">{{ api_single[0]['market_cap'] }} USD</span></font></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column"><font color="white"><span class="text-left head"><strong>Total volume</strong></span> <span class="text-left bottom">{{ api_single[0]['total_volume'] }} USD</span></font></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column"><font color="white"><span class="text-left head"><strong>Circulating supply</strong></span> <span class="text-left bottom">{{ api_single[0]['circulating_supply'] }} {{ api_single[0]['symbol'].upper() }}</span></font></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex flex-column"><font color="white"><span class="text-left head"><strong>High 24h</strong></span> <span class="text-left bottom">{{ api_single[0]['high_24h'] }} USD</span></font></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column"><font color="white"><span class="text-left head"><strong>Low 24h</strong></span> <span class="text-left bottom">{{ api_single[0]['low_24h'] }} USD</span></font></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column"><font color="white"><span class="text-left head"><strong>Change</strong></span> <span class="text-left bottom"><font color="{{ 'red' if api_single[0]['price_change_percentage_24h'] < 0 else 'green' }}">{{ api_single[0]['price_change_percentage_24h'] }}%</font></span></font></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="px-3"><a href="{{ url_for('plot', name=name) }}"><button type="button" class="btn btn-primary btn-block">Graph</button></a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="py-3">
+                            <div><h3>More statistics</h3></div>
+                            <br>
+                            <div><p><strong>Market cap rank: </strong>{{ api_single[0]['market_cap_rank'] }}</p></div>
+                            <div><p><strong>Fully diluted valuation: </strong>{{ api_single[0]['fully_diluted_valuation'] }} USD</p></div>
+                            <div><p><strong>Price change 24h percentage: </strong><font color="{{ 'red' if api_single[0]['price_change_percentage_24h'] < 0 else 'green' }}">{{ api_single[0]['price_change_percentage_24h'] }}%</font></p></div>
+                            <div><p><strong>Max supply:  </strong>{{ api_single[0]['max_supply'] }}</p></div>
+                            <div><p><strong>Total supply:  </strong>{{ api_single[0]['total_supply'] }}</p></div>
+                            <div><p><strong>ATH: </strong> {{ api_single[0]['ath'] }}</p></div>
+                            <div><p><strong>ATH change percentage: </strong><font color="{{ 'red' if api_single[0]['ath_change_percentage'] < 0 else 'green' }}">{{ api_single[0]['ath_change_percentage'] }}%</font></p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <form action="/courses/{{name}}/result" method="post">
+                <div class="input-group input-group-lg p-3 mb-1 bg-dark text-white">
+                    <div class="input-group-prepend">
+                         <span class="input-group-text" id="inputGroup-sizing-sm"><img src="{{ api_single[0]['image'] }}" width="26" height="20"></span>
+                         <input type="text" class="form-control" size="101" style="height:50px;font-size:14pt;width:595px;" name="num1">
+                    </div>
+                    <input type="submit"  class="btn btn-outline-secondary text-white" size="70" value=">>" id="calc">
+                    <input type="text" value="{{sum}} USD" disabled>
+                </div>
+            </form>
+    </div>
+</div>
+<div class="container mt-2">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            <div class="card p-2 text-center p-3 mb-2 bg-dark text-white">
+                <tokeneo-chart data-crypto="{{api_single[0]['symbol'].upper()}}" data-fiat="USD"></tokeneo-chart>
+                <tokeneo-chart-link>Source: <a href="https://tokeneo.com/pl/" rel="noreferrer noopener">Tokeneo</a></tokeneo-chart-link>
+                <br>
+                <script src="https://tokeneo.com/assets/front/widgets/tokeneo-chart.min.js"></script>
+                <main class="content">
+                    <article>
+                        <div align="left">
+                            {% if api_single[0]['name'] == "Bitcoin" %}
+                                <h2>What is Bitcoin? When was Bitcoin created?</h2>
+                                <br>
+                                <p>Bitcoin (BTC for short) is the oldest crypto in the world. It was created in 2008
+                                    by a person or group of people hiding under the code name <a href="https://en.wikipedia.org/wiki/Satoshi_Nakamoto" target="_blank">Satoshi Nakamoto</a>. This coin differs
+                                    from the traditional currencies you know so far, such as the Polish zloty or the US dollar in
+                                    that it does not appear in physical form.</p>
+                                <p>Bitcoin, like all other cryptovalutes, was placed on a so-called <a href="https://www.investopedia.com/terms/b/blockchain.asp" target="_blank">blockchain</a>. In other words, it is located in a decentralized, distributed network.
+                                    This means that it cannot be managed by a single unit or institution. Indeed, the power over this virtual coin is exercised by all the users of its network.</p>
+                                <h3>Mining (digging) Bitcoin - what is it?</h3>
+                                <p>As you probably guess, Bitcoins do not come from the air. They are extracted by means of special devices called cryptovalutowtmi excavators.
+                                    This whole process is called mining or simply digging BTC.
+                                    The people who do this are called cryptocurrency miners, sometimes also minerals </p>
+                                <p>People who have never been in contact with this industry before and have had a completely different idea of a cryptovalut mine may be completely surprised.
+                                    Why? Well, a cryptocurrency mine can actually be any room where mining equipment works on solving complicated mathematical puzzles.
+                                    All this is to be rewarded with a BTC block. The initial image of a real miner with a crowbar in his hand should be put aside.</p>
+                                <p>How does the Bitcoin digging process work properly and what do cryptocurrency excavators look like? Well, miners receive the so-called Proof of Work (PoW).
+                                    This Proof of Work is the BTC coins. To do this work, however, you need devices with high computing power.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Ethereum" %}
+                                <h2>What is Ethereum? Basic information</h2>
+                                <br>
+                                <p>Probably when you hear about Ethereum you can imagine cryptographers like Bitcoin (BTC) or Ripple.
+                                    It is important for you to understand at the very beginning that his role goes much further.
+                                    In fact, it is an open source platform based on blockchain technology.
+                                    It allows developers to create and implement decentralized applications.</p>
+                                <p>The functioning of Ethereum can be compared to the Internet in a way.
+                                    Nowadays, huge amounts of data are in the clouds or in the hands of technological giants such as Google and social giants like Facebook.
+                                    These companies need many specialists who make sure that all information about users is secure. Unfortunately,
+                                    there is a very high risk of hacking attacks. The tactics chosen by cybercriminals are becoming increasingly sophisticated.
+                                    As a result, there is a danger that someone without our consent and knowledge will be able to steal or modify data belonging to us.</p>
+                                <p>Why are we talking about all this? Well, this gap can be filled by the Ethereum.
+                                    Its main goal is to eliminate all third parties that have so far been responsible for storing information.
+                                    All this is possible thanks to blockchain technology. Ethereum allows applications to operate in a distributed system.
+                                    This in turn means that data is not stored on individual servers, but is distributed among a huge number of computers from around the world.
+                                    All information is transparent, its destruction or modification is not so easy.</p>
+                                <p>Data stored on one server can be lost or changed very quickly. If they are on multiple computers, one user will not be able to destroy them.
+                                    The only way would be a 51% attack. This means that more than half of the people in the network would have to collide.
+                                    With millions of servers from around the world this is almost impossible.</p>
+                                <p>The vision behind the creation of Ethereum was to create the so-called computer of the world, i.e.
+                                    a huge network supporting various applications, without the intermediation of third parties.
+                                    An important advantage of Ethereum, which should be emphasized, is that unlike other blockchain computers,
+                                    it is programmable. What does this mean? Well, it can be used to create new applications:
+                                    building cryptographic portfolios, financial platforms, games and many other things.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Tether" %}
+                                <h2>What is a Tether - basic information</h2>
+                                <br>
+                                <p>A Tether in short (USDT) is a type of stable cryptovalute, i.e.
+                                    one that is supposed not to be subject to exchange rate fluctuations or its price volatility is small.
+                                    The professional industry term for such a virtual currency is stablecoin</p>
+                                <p>Before we move on to discussing the history and goals of Tether's creation, let's focus on what makes this
+                                    type of coin different from cryptovalut such as Bitcoin. Well, the issuer of a stablecoin
+                                    (the company or institution behind it) should provide it with coverage in a fiduciary currency (traditional,
+                                    such as the US dollar) or another asset of a certain value (it may be a commodity such as gold).</p>
+                                <p>Many stablecoins appeared on the cryptovalut scene. The crown is worn by Tether, which is currently in fourth place
+                                    in the CoinMarketCap ranking. But a moment, how can a virtual one-dollar coin be higher than those worth 100
+                                    or even 200 dollars? Well, our dear reader, the value of a given cryptovalued coin is not only evidenced by its price.
+                                    Everything depends on market capitalization. How to calculate it? It is enough to multiply the number of all coins available in
+                                    circulation by the current price.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "XRP" %}
+                                <h2>What is Ripple? Short, concise and about</h2>
+                                <br>
+                                <p>To the surprise of many people, the name Ripple does not refer to the cryptographer at all, but to the company itself,
+                                    which is building a network of currency exchange and money transfers. It is also a real-time gross settlement system.
+                                    It is worth adding that this platform is an open source protocol (Open Source), which enables quick and cheap transactions.</p>
+                                <p>Unfortunately, as a result of excessive information or misunderstanding, many people confuse the Ripple with its own crypto - XRP.
+                                    Although the cryptocurrency community is already used to this phenomenon,
+                                    it is worth keeping in mind that confusing the two concepts and using them interchangeably is simply not correct.
+                                    What's more, this way more users can be misled!</p>
+                                <h3>What is an XRP cryptocurrency?</h3>
+                                <p>In 2012, based on Ryan Fugger's work and Bitcoin inspiration, Ripple decided to implement a general ledger
+                                    called Lendple Consensus Ledger (RCL). At the same time, a cryptocurrency natalut called XRP was created.
+                                    It is worth mentioning that the RCL name was later changed to XRP Ledger (XRPL) - its use was discussed in the chapter
+                                    dedicated to the three RippleNet services.</p>
+                                <p>XRPL operates as a distributed system that stores all accounting information of network participants as well
+                                    as provides services related to the exchange of multiple currency pairs. Ripple himself writes that it
+                                    is an open source distributed book, which enables real time transactions. What's more,
+                                    these transactions are secured and verified by network participants through a consensus mechanism.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Binance Coin" %}
+                                <h2>Binance Coin (BNB) – what is it?</h2>
+                                <br>
+                                <p>Binance Coin (BNB) is a tool token belonging to one of the most popular crypto exchanges - Binance.
+                                    It was issued in ERC-20 standard on blockchain Ethereum.</p>
+                                <p>The ICO (public collection) of Binance Coin lasted 11 days. It started on June 26 and ended on July 3, 2017.
+                                    Investors had two options: to get 2,700 BNB tokens for 1 Ethera (ETH) or 20,000 BNB for 1 Bitcoin (BTC).</p>
+                                <p>Total supply of Binance Coin is 200 million coins. 100 million BNB is allocated to ICO. This amount is constantly decreasing due to the so-called
+                                    combustion process. We will talk about why a given amount of tokens is periodically permanently destroyed in a dedicated chapter.</p>
+                                <p>Important: Although the BNB was initially released in the ERC-20 standard on the Ethereum network,
+                                    it was transferred to the native blockchain created by Binance. Tokens were therefore converted in 1:1
+                                    ratio to BEP2 BNB. The announcement about the launch of the mainnet was published in April 2019.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Bitcoin Cash" %}
+                                <h2>What is hard fork?</h2>
+                                <br>
+                                <p>Before we move on to discussing what Bitcoin Cash (BCH) actually is, we need to explain the term: hard fork.
+                                    Understanding this is very important. This will give you an overview of how Bitcoin's younger brother (BTC) was born.
+                                    You will also find out what purpose it was created for. So let's get started!</p>
+                                <p>Hard fork is nothing but a branch of a blockchain (chain of blocks) of a given cryptovalute into two separate parts.
+                                    Both of them share the same history/future, but face a completely different future.
+                                    During hard fork, some modifications/upgrades are added to one of the blockchain pages.
+                                    This is a change in the software that is responsible for the functioning of the cryptovalute.</p>
+                                <p>What is the purpose of hard forks, who decides about them and whether they are necessary?
+                                    Due to the fact that one of the two parts of the blockchain is changed in the protocol,
+                                    according to the (new) rules it prevents outdated nodes from accepting blocks generated by the latest software version.
+                                    The nodes that do not pass the update process will take a completely different direction from the updated ones,
+                                    not according to the developers' assumptions.</p>
+                                <h3>Hard fork Bitcoin. The history of Bitcoin Cash</h3>
+                                <br>
+                                <p>As you can guess, there was a lot of discussion about hard fork Bitcoin. It's worth adding that for most programmers,
+                                    code in cryptography is sacred and should not be changed. Nevertheless, with more and more users coming to the cryptovalut market,
+                                    Bitcoin itself began to struggle with an extremely important problem. It was unable to process so many transactions in its own network.</p>
+                                <p>Due to the fact that each new BTC block is generated every 10 minutes, and its size is only 1 MB,
+                                    numerous controversial issues have arisen at this level. While the Bitcoin miners demanded an increase
+                                    in the size of BTC blocks, the programmers were against it. They presented a completely different solution to this problem.
+                                    In their opinion, implementing Segregates Witness (SegWit) would be sufficient to increase the amount of data in each block.
+                                    Another problem was that Bitcoin began to be seen not as a means of payment but as an investment asset.</p>
+                                <p>Both sides unfortunately did not manage to come to an agreement, so on August 1, 2017 the hard fork on Bitcoin was reached.
+                                    This resulted in two blockchins: Bitcoin (BTC) and Bitcoin Cash (BTC). It is worth noting that they differ in principle only
+                                    in the size of the blocks. Of course, this improvement allows to make more transactions with BCH. However,
+                                    Bitcoin Cash still uses the same algorithm as Bitcoin</p>
+                                <h3>Bitcoin (BTC) and Bitcoin Cash (BCH) - differences</h3>
+                                <br>
+                                <p>Although many people believe that Bitcoin Cash will never be able to replace the real Bitcoin, in many respects
+                                    it has taken the lead over it. One should take into account, for example, the fact that the BCH network
+                                    is more scalable than BTC. This allows transactions to be made in seconds, not minutes. If we are on the subject,
+                                    it should be added that the transaction fees are also much lower.</p>
+                                <p>However, since Bitcoin is well established on the market, it is the most popular and best known cryptic, in some respects
+                                    these features give it a forum. In the case of mining (cryptovalent mining), miners find it more profitable to dig BTC than BCH.
+                                    Where does this come from? Well, the cost of extracting both of these cryptovalutes is relatively similar, but the price for
+                                    one Bitcoin is much higher. Therefore, a miner extracting this cryptocurrency will earn more than a miner focusing on digging
+                                    for Bitcoin Cash.</p>
+                                <p>Bitcoin also enjoys greater trust among investors. As we have already mentioned, it is a leading crypto player.
+                                    BCH is losing to BTC in terms of popularity, which is why it is listed on fewer crypto exchanges. Due to the fact that he also
+                                    has fewer currency pairs on different platforms, he becomes less marketable than his older brother.
+                                    Also, the number of crypto wallets dedicated to Bitcoin Cash is much smaller.</p>
+                                <p>One of the main features of BCH is certainly safety. It is based on Bitcoin Core blockchain, and the community describes it
+                                    as one of the most resistant blockchain technologies. However, Bitcoin has much more community support behind it, making it
+                                    more decentralized. Moreover, unlike BCH, BTC is in the hands of its users.</p>
+
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Polkadot" %}
+                                <h2>There is no description yet :(</h2>
+                                <br>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Chainlink" %}
+                                <h2>What is Chainlink? For what purpose was it launched?</h2>
+                                <br>
+                                <p>This project was created to solve the problem that smart contracts face. Well, they did not have access to data on their own.
+                                    When the programmers were implementing the chosen smart contract, they encountered a communication problem.
+                                    It was unable to connect to key external resources such as offline data or APIs (a strict set of rules and descriptions
+                                    of how computer programs communicate with each other).</p>
+                                <p>Lack of external connectivity was a problem for every smart network of contracts. What's more, connecting
+                                    smart contracts with input data via a single node was not a good solution, as this was the point of failure.
+                                    The solution to this problem was the highly decentralized Oracle Chainlink network.</p>
+                                <p><font color="#EA5946">It's worth knowing: </font>Chainlink provides the same security guarantee as the intelligent contracts themselves. </p>
+                                <p><font color="#E6D94E">Key information: </font> The White Paper of the Chainlink project was published on September 4, 2017. This network provides an easy way to combine
+                                    intelligent contracts with the data sources and APIs that are necessary for their operation. Chainlink also allows to transfer funds.
+                                    This project cooperates with leaders of banking technology such as SWIFT. In this way it connects banks with intelligent contracts.</p>
+                                <p>The motto of the Chainlink project is that intelligent contracts should be reliable! This means that the input and output on which such a contract is based must be secure!</p>
+                                <h3>Who created Chailnik? The history of project creation</h3>
+                                <br>
+                                <p>This project was founded by Sergei Nazarov, currently CEO of Chainlink, and Steve Ellis, Director of Technology. The company behind it is called SmartContract. It is based in San Francisco.</p>
+                                <p>In September 2017 Chainlink collected 32 million dollars in the initial coinage offer (ICO). A billion LINK tokens were issued, the use of which will be described in more detail in the following chapters.</p>
+                                <p>In November 2018 Chainlink took over the Town Crier system. This is a highly reputable smart contract and a project focused on data protection. This system complements the Oracle Chainlink system. </p>
+                                <p>What problems does Town Crier solve? Well, it uses Intel SGX technology to provide a strong guarantee that data comes from an existing, trustworthy source. </p>
+                                <p><font color="#EA5946">It's worth knowing: </font>The innovative Intel SGX technology is becoming increasingly popular among many applications designed to protect programs from outside interference.
+                                    This abbreviation fully stands for Software Guard Extensions. It defines private memory regions of the computer, called enclaves.</p>
+                                <p>Even the operators of the Town Crier server are not able to manipulate the data processed by this system. And what use does it gain in the Chainlink project? Well, it increases the privacy
+                                    and verifiable authenticity of the data that enters the decentralized Oracle network.</p>
+                                <p><font color="#E63200">IMPORTANT: </font>By using Town Crier, Oracle's Chainlink nodes will be able to ensure that the data they provide has not been altered BEFORE or BEFORE being transferred to an intelligent agreement.</p>
+                                <p>In May 2019 Chainlink was launched in the Ethereum network. </p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Litecoin" %}
+                                <h2>What is Litecoin (LTC)?</h2>
+                                <br>
+                                <p>Litecoin (LTC) is one of the oldest and at the same time the most popular cryptocurrency in the world.
+                                    It was quickly hailed as Bitcoin's younger brother. Of course not because he was born only a few years after his birth.
+                                    All because he uses Bitcoin's source code. Although there are many differences between the two cryptovalots,
+                                    they have some important features in common.</p>
+                                <p><font color="#A8E49E">Interesting fact: </font>The supporters of Litecoin very often call it digital silver. It is also a direct reference to digital gold - Bitcoin</p>
+                                <h3>Who is the creator of Litecoin?</h3>
+                                <br>
+                                <p>There is no anonymous character behind this crypted one. Its creator is programmer Charlie Lee. He has a lot of experience behind him.
+                                    For 10 years he worked for the technological giant Google. In this company he was writing code for Chrome operating system.
+                                    He became interested in Bitcoin only in 2011, but very quickly decided to create a similar cryptovaluta.
+                                    Of course, from the very beginning Lee emphasized that he does not intend to compete with digital gold.
+                                    However, he wanted to give life to a cryptocurrency, which could bring some novelty to the market.
+                                    Litecoin was therefore focused on smaller transactions, such as online shopping, for example. </p>
+                                <p>Since the issue of this cryptovalute, Lee has worked on one of the most popular cryptovalute exchanges - Coinbase.
+                                    The founder of LTC left the company only in 2017 to focus exclusively on Litecoin. In spring 2018 this cryptovaluta started to be extremely successful.
+                                    It was then that rumors began to circulate among the community that Lee plans to leave Litecoin.
+                                    In fact, this IT specialist was actually considering such a possibility, mainly because he knew that his involvement in the project
+                                    would never achieve complete decentralization. However, so far this topic remains open. Lee has not indicated when he intends
+                                    to withdraw completely from the project. </p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Crypto.com Coin" %}
+                                <h2>There is no description yet :(</h2>
+                                <br>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Cardano" %}
+                                <h2>What is Cardano? Who created this project?</h2>
+                                <br>
+                                <p>Cardano is a cryptovalut project evolving over time. The idea of its creation was born in 2015 - interestingly, it did not have
+                                    an authoritative white paper. Its aim was and is to go beyond the schemes. It aims to change the way cryptovalut is designed and developed.
+                                    Cardano wants to provide a more diverse and thus sustainable ecosystem, taking into account the dynamically changing needs of users as well
+                                    as systems that strive for integration.</p>
+                                <p>This is an Open Source project - with an open-source code. The Cardano team assumes that it is the ability to make
+                                    a soft or hard fork that is critical to the long-term success of a cryptovert.</p>
+                                <p>This project is headed by Charles Hoskinson. Moreover, he is also co-founder of Ethereum. He started his collaboration with Vitalik Buterin
+                                    in late 2013. He left this project in June 2014. Before he became interested in blockchain, he studied analytical number theory.
+                                    A colleague persuaded him to create a new project called Input-Output Hong Kong (IOHK). This is how the engineering and research
+                                    company was established, focused on the construction of cryptovalut and blockchain.</p>
+                                <p>Cardano was not launched until 2017, when it raised $60 million in public collections (ICO). Interestingly, it is one of the first platforms to be built in the Haskell
+                                    programming language. The team behind this project consists of researchers and engineers with a lot of knowledge and experience.
+                                    Cardano is supported by three organizations with separate functions in terms of ownership and leadership, these are: The IOHK,
+                                    which designs and builds this project, Emurgo, which is responsible for supporting commercial projects, and the Cardano Foundation,
+                                    which oversees the development of the ecosystem.</p>
+                                <h3>What is an ADA crypted? What is its function?</h3>
+                                <br>
+                                <p>ADA is a cryptocurrency belonging to the Cardano project. Users from all over the world can use it for safe and
+                                    fast exchange of values, without the need to involve a third party in the process. Each such transaction is recorded
+                                    on the Cardano blockchain.</p>
+                                <p>Interesting fact: The name of the cryptovalute ADA comes from Ada Lovelance. This woman lived in the nineteenth century, was a mathematician
+                                    and is considered to be the first computer programmer in the world. Smaller units of virtual currency belonging to the Cardano
+                                    project are called Lovelance in honour of her name.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Bitcoin SV" %}
+                                <h2>Is there a Bitcoin SV (BSV)?</h2>
+                                <br>
+                                <p>Bitcoin SV (BSV) is a cryptocurrency, which was created by the hard fork of Bitcoin Cash (BCH). When the network in Bitcoin
+                                    (BTC) itself was broken up, the newly created crypto community did not fully agree on its further development. As a result,
+                                    two camps were formed around Bitcoin Cash. One of them remained under the assumptions that BCH had adopted from the very beginning,
+                                    while the other one aimed to give the miners another choice of consensus rules for Bitcoin Cash. Therefore, on November 15, 2018,
+                                    the network was broken up and Bitcoin SV, also known as Bitcoin Cash SV (BCHSV), was formed.</p>
+                                <h3>Who created Bitcoin SV and for what purpose?</h3>
+                                <p>The cryptovaluta Bitcoin SV is developed by a company called nChain, headed by Craig Wright. You probably
+                                    have heard that name more than once. All because this man claims to be the creator of Bitcoin - Satoshim Nakamoto.</p>
+                                <p>Craig Wright has repeatedly tried to convince the world of his thesis. However, he never provided enough evidence to support it.
+                                    As a result, the crypto community hailed him as the self-proclaimed Satoshim Nakamoto.</p>
+                                <p>What was the purpose of Bitcoin SV? Well, as Craig Wright says, it is the realization of the vision of the Bitcoin creator himself.
+                                    The full development of the abbreviation of this controversial cryptovaluta is: Bitcoin Satoshi Vishion, or the vision of Satoshi Nakamoto.</p>
+                                <h3>Bitcoin SV and Bitcoin Cash - differences</h3>
+                                <br>
+                                <p>Although BSV shares several common features with BCH, there are a number of differences between the two cryptovalots.
+                                    The basic one is the maximum capacity of the transaction block. In Bitcoin SV it is 128 MB
+                                    (to be increased to 512 MB in the future), in Bitcoin Cash it is only 32 MB (initially 8 MB).</p>
+                                <p>While BCH decided to introduce a canonical arrangement of transactions, BSV remained with the current topological model.
+                                    Although the solution introduced by Bitcoin Cash provides much higher scalability within a block of the same capacity,
+                                    it was not implemented in Bitcoin SV due to the potential risk of lowering security. </p>
+                                <p>Another important difference between BCH and BSV is that the first cryptocurrency has an operating code called OP_CHECKDATASIG.
+                                    It was designed to confirm messages from outside the blockchain. This is related to the development of functionality for smart contracts.
+                                    Bitcoin SV, on the other hand, stated that it does not need such a solution.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "USD Coin" %}
+                                <h2>There is no description yet :(</h2>
+                                <br>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "EOS" %}
+                                <h2>What is an EOS token?</h2>
+                                <br>
+                                <p>EOS is a platform designed to build decentralized applications (dApp). Although it functions in a similar way to Ethereum,
+                                    its supporters claim that it can be far ahead of this blockchain</p>
+                                <p>The main mission of EOS is to become a simple, scalable platform for everyday use. It is assumed that it will allow for thousands of
+                                    transactions per second. EOS focuses on providing a comprehensive operating system for decentralized applications by offering user
+                                    authentication, cloud services and server hosting.</p>
+                                <h3>History of the EOS project</h3>
+                                <br>
+                                <p>The ICO of the EOS project started on 26 June 2017. Interestingly, it lasted until June 1, 2018. That's 350 days.
+                                    We can say that in this respect EOS has broken the record of all time.</p>
+                                <p>Of course, the public collection did not last that long because there were no people willing to participate. All this was planned.
+                                    The creators stated that it is worth giving more users a chance to get involved in the project.</p>
+                                <p>The ICO has raised more than $4 billion in total in almost a year.</p>
+                                <h3>What is an EOS cryptocurrency?</h3>
+                                <br>
+                                <p>The EOS platform has its own native crypto-box of the same name. Currently, this virtual coin is on 7th position
+                                    in the CoinMarketCap ranking (in terms of market capitalization). Its total supply is 1 049 090 785 EOS. In turn,
+                                    there are 952 390 774 EOS coins in circulation.</p>
+                                <p>The current exchange rate of this cryptovalute is 4.83 USD (as of 10.02.2020). Its ATH, i.e. the highest price level of EOS,
+                                    reached on 29 April 2018. It amounted to 22.89 USD. This cryptovalute is used for running applications in the EOS network.
+                                    It is therefore essential for people who want to use this blockchain.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Monero" %}
+                                <h2>What is Monero (XMR)?</h2>
+                                <br>
+                                <p>Monero (XMR) is a cryptocurrency oriented towards confidential and private transactions. This virtual coin differs from Bitcoin (BTC) or Ethera (ETH)
+                                    in that its blockchain is not public. No one can trace the transaction history on it, or gain access to public addresses,
+                                    as is the case with most other crypts. Operations carried out through Monero become undetectable with advanced cryptography solutions.</p>
+                                <p>What are the functions of this cryptocurrencies? As we have already mentioned above, it is peer-to-peer (P2P)
+                                    electronic cash that allows for fast, cheap and confidential transfers of funds from one person to another
+                                    without any time or border barriers.</p>
+                                <h3>Monero and Bitcoin - basic differences</h3>
+                                <br>
+                                <p>The XMR cryptocurrency differs from BTC in many ways. Although Bitcoin is usually attributed with anonymity,
+                                    in reality it has nothing to do with it. The BTC blockchain is public. This means that every user can see when,
+                                    from which public address, where and how much money has been transferred. Due to the fact that most cryptographic
+                                    platforms have to follow KYC and AML policies, it is easy to get to the blockchain. In other words, if there is
+                                    verification on the stock exchange, the company knows who the public address belongs to and, if necessary, is obliged
+                                    to provide information to the relevant law enforcement authorities.</p>
+                                <p>This is completely different for Monero. Although this cryptovlaut is not as popular as BTC, it gains an advantage
+                                    in terms of transaction privacy. Of course, this is not the only difference between the two coins.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "TRON" %}
+                                <h2>What is TRON?</h2>
+                                <br>
+                                <p>TRON is a blockchain designed for the entertainment ecosystem. This platform focuses mainly on the market for decentralized applications
+                                    (dApps) for digital content. TRON facilitates their creation and implementation. Its main mission is to create a global entertainment system.</p>
+                                <h3>What problems does blockchain TRON solve?</h3>
+                                <br>
+                                <p>TRON tries to fill the gap between creators and consumers of content. This platform seeks to eliminate intermediaries (third parties).
+                                    As a result, there is a significant reduction in costs, with download times also being reduced.</p>
+                                <p>What makes the TRON platform different? Well, transactions are concluded on it between two parties. For example, Netflix offering entertainment on
+                                    demand is controlled by a central entity. In order to watch the content, the user has to buy a given package. The result is that Netflix reduces
+                                    the cost of hosting the film on its platform from the fee charged to the consumer and pays the rest to the producer. </p>
+                                <p>TRON aims to eliminate intermediaries such as Cda and Netflix. This platform allows developers to host content on blockchain.
+                                    A global audience can therefore make a direct payment for watching the content. This system is becoming more efficient and cost-effective. </p>
+                                <p>Conclusion: TRON uses a peer-to-peer network to provide creators and distributors with direct access to consumers.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "OKB" %}
+                                <h2>There is no description yet :(</h2>
+                                <br>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Tezos" %}
+                                <h2>What is Tezos? What problems it solves</h2>
+                                <br>
+                                <p>Imagine a blockchain that evolves on its own. As new solutions appear on the web, an update is made. This is the basis of the Tezos.
+                                    Although in short it can be described as a platform designed for smart conntracts and decentralized applications (dApps),
+                                    it goes beyond what the competition has offered so far. And most importantly, it stands out quite strongly from the competition.</p>
+                                <h3>Who created Tezos? The history of the creation of the project</h3>
+                                <br>
+                                <p>The thesis was developed by marriage: Kathleen and Arthur Breitman. The concept of this project was presented already on September 2, 2014
+                                    with the publication of the White Paper. Arthur Breitman was a research engineer at Google and Waymo. He previously worked as a quantitative
+                                    analyst at Goldman Sachs and Morgan Stanley. His wife, in turn, held the positions of Associate Strategy at R3 and Associate Management at
+                                    Bridgewater Associates. </p>
+                                <p>The ICO of the Tezos project lasted 13 days from July 1 to 14, 2017. At that time 65703 BTC and 361122 ETH were collected. It was equivalent
+                                    to 232 million dollars. Interestingly, no target amount was set for the project to be collected. Undoubtedly, it was one of the largest
+                                    crowdfunders at that time. </p>
+                                <p>Kathleen and Arthur Breitman founded Dynamic Ledger Solutions (DLS), which was to stand behind the Tezos project.
+                                    Next to it, an independent non-profit organization called the Tezos Foundation was established. It controlled the funds collected during the ICO.</p>
+                                <p>On the way there was a conflict between Kathleen and Arthur Breitman, owners of intellectual rights, and Johhan Gevers,
+                                    President of the Tezos Foundation. Consequently, after numerous disputes, he left the company. However, he received
+                                    a 400 thousand dollar severance pay. </p>
+                                <p>It should be added that as a result of internal conflicts and failure to keep promises, investors started to lose hope that the project will be launched at all.
+                                    In the face of growing anxiety, on October 25, 2017 a lawsuit against Tezos was filed in the California District Court.
+                                    Not seeing any progress in the project, users began to demand a refund of the funds allocated to the ICO. There were also those who claimed
+                                    that the Tezzi tokens (XTZ) used for the collection were securities, but were not registered. </p>
+                                <p>Undoubtedly, the beginnings of the Thesis project were very turbulent. It came to life only in 2018. On June 30, the beta version of
+                                    the Tezos test network was launched, and on September 17, the main network</p>
+                                <h3>XTZ cryptocurrency - what is it and what is its use?</h3>
+                                <br>
+                                <p>The Tezos project has its own cryptic cryptographic device called Tezzi or Tezzi (XTZ). Currently it is on the 11th position in the CoinMarketCap ranking.
+                                    Its current price is 2,08 USD (as of 03.02.2020). Its ATH, i.e. the highest price level of the cryptovalent, reached 17 December 2017.
+                                    Its price was then 10 USD. The market capitalization of this cryptocurrency is 442 096 797 USD. The number of all coins available in circulation
+                                    is 694 191 974 XTZ. Their maximum supply is 763 306 930 XTZ. Due to this limitation, the cryptovalent Tezzi has a deflationary character.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "Stellar" %}
+                                <h2>What is Stellar?</h2>
+                                <br>
+                                <p>Stellar is a decentralized open-source payment protocol. It allows for fast international transactions using any currency pair.
+                                    This project has its own blockchain. </p>
+                                <p>Transactions made in the Stellar network are added to a common, distributed database, accessible to every user around the world.
+                                    Interestingly, Stellar uses its own unique consensus method. It allows for quick yet cheap transactions in just a few seconds.</p>
+                                <h3>What was the purpose of Stellar?</h3>
+                                <br>
+                                <p>The exchange of fiduciary, crypto or token currencies can be a long and costly process. Stellar solves this problem by becoming
+                                    a global network that is able to handle thousands of such exchanges per second. This project offers solutions to fill the gaps between
+                                    traditional financial organizations and users.</p>
+                                <p>Stellar provides tools that allow for fast and cheap cross-border transfers. Currently, making such transfers through banks becomes not only
+                                    time-consuming but also expensive. This project therefore offers almost zero conversion, cooperating with several payment processors as well
+                                    as banking institutions.</p>
+                                <p>In other words, Stellar works with centralized organizations in a decentralized way. It solves the problems of traditional payment systems.</p>
+                                <h3>What is Stellar crypted (XML)?</h3>
+                                <br>
+                                <p>The Stellar network has its own native XML crypto, also called Lumen. It has a function similar to Ethera in Ethereum.
+                                    You could say that XML powers the Stellar network. This crypto is used, among other things, to pay trading fees and maintain
+                                    accounts on the Stellar network.</p>
+                                <p>The project assumes that each account for XML has to have a small amount of this crypted. This is due to the basic construction of
+                                    the Stellar book. Without a nominal barrier it could be filled with spam. This in turn would be an obstacle in becoming a fast and
+                                    efficient payment system. Currently the minimum balance is 1 XML. The minimum transaction fee is 0.00001 XML. </p>
+                                <p>Initially, 100 billion XML tokens were issued. In November 2019, the overall supply was halved. So there are only 50 billion
+                                    Lumen coins and there will be no more. While 20 billion XML tokens were released, the remaining 30 billion were retained by
+                                    the Stellar Development Foundation for further development and promotion. These Lumens will be on the market in the next few years.</p>
+                            {% endif %}
+
+                            {% if api_single[0]['name'] == "NEO" %}
+                                <h2>There is no description yet :(</h2>
+                                <br>
+                            {% endif %}
+                         </div>
+                    </article>
+                    <p align="left">Source: <a href="https://tokeneo.com/pl/kryptowaluty/" target="_blank">https://tokeneo.com/pl/kryptowaluty/</a></p>
+                </main>
+                <h4 align="left">More</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"><img src="{{api2[0]['image']}}" width="50"><p><a href="{{url_for('search', name=api2[0]['id'])}}"><font color="white">{{api2[0]['name']}}</font></a></p></th>
+                            <th scope="col"><img src="{{api2[1]['image']}}" width="50"><p><a href="{{url_for('search', name=api2[1]['id'])}}"><font color="white">{{api2[1]['name']}}</font></a></p></th>
+                            <th scope="col"><img src="{{api2[2]['image']}}" width="50"><p><a href="{{url_for('search', name=api2[2]['id'])}}"><font color="white">{{api2[2]['name']}}</font></a></p></th>
+                            <th scope="col"><img src="{{api2[3]['image']}}" width="50"><p><a href="{{url_for('search', name=api2[3]['id'])}}"><font color="white">{{api2[3]['name']}}</font></a></p></th>
+                            <th scope="col"><img src="{{api2[4]['image']}}" width="50"><p><a href="{{url_for('search', name=api2[4]['id'])}}"><font color="white">{{api2[4]['name']}}</font></a></p></th>
+                            <th scope="col"><img src="{{api2[5]['image']}}" width="50"><p><a href="{{url_for('search', name=api2[5]['id'])}}"><font color="white">{{api2[5]['name']}}</font></a></p></th>
+                         </tr>
+                    </thead>
+                </table>
+                <a href="{{ url_for('courses') }}"><font>Full list of cryptocurrencies</font></a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

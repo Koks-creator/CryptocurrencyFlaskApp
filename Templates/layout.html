@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/footer.css">
+    <title>CrCurrency - {{ title }}</title>
+</head>
+<body style="background-color:#ecf0f1;">
+    <!-- Image and text -->
+
+    <nav class="navbar navbar-light bg-dark">
+        <a class="navbar-brand" style="color:white;" href="{{ url_for('about') }}">
+            <img src="https://seeklogo.com/images/B/bitcoin-logo-DDAEEA68FA-seeklogo.com.png" width="31" height="31" class="d-inline-block align-top" alt="" loading="lazy">
+            CrCurrency
+        </a>
+
+        <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon bg-dark"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div align="center">
+                <ul class="navbar-nav">
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item active">
+                        <a class="nav-link" style="color:white;"  href="{{url_for('about')}}">About <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white;"  href="{{url_for('courses')}}">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white;"  href="{{url_for('about_api')}}">Api</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white;"  href="{{url_for('account')}}">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white;" href="{{url_for('logout')}}">Logout</a>
+                    </li>
+
+                    {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link" style="color:white;"  href="{{url_for('about')}}">About <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white;"  href="{{url_for('courses')}}">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white;"  href="{{url_for('about_api')}}">Api</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white;"  href="{{url_for('register')}}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white;"  href="{{url_for('login')}}">Login</a>
+                    </li>
+                </ul>
+                 {% endif %}
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <div class="row d-flex justify-content-center">
+        <div class="" align="center" style="width: 920px;">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages%}
+            {% for category, message in messages %}
+                 <div class="alert alert-{{category}}">
+                        {{message}}
+                 </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+    </div>
+
+        {% block content %}{% endblock content %}
+    </div>
+
+<br>
+<br>
+<br>
+
+  <!-- Site footer -->
+<footer class="site-footer  bg-dark text-white">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-12 col-md-6">
+                 <h6>That's it!</h6>
+                 <p class="text-justify">You scrolled down to the end of a page, congratz.
+                 <br> Here's my e-mail piotr.blaszczak2002@gmail.com you can mail me or something</p>
+               </div>
+          </div>
+          <hr>
+      </div>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-10 col-sm-6 col-xs-12">
+                  <p>Copyright &copy; 2017 All Rights Reserved by
+              <a>Scanfcode</a>.
+                  </p>
+              </div>
+              <div align="right" >
+                  <div>
+                      <a href="https://www.facebook.com/piotrekstrzelec.town" target="_blank"><img src="https://seeklogo.com/images/F/facebook-icon-circle-logo-09F32F61FF-seeklogo.com.png" width="40" ></a>
+                      <a href="https://twitter.com/Juan65594084" target="_blank"><img src="https://seeklogo.com/images/T/twitter-icon-circle-blue-logo-0902F48837-seeklogo.com.png" width="40" ></a>
+                      <a href="https://www.youtube.com/channel/UCXpJbgUgeoi_99nkqNNetKg" target="_blank"><img src="https://seeklogo.com/images/Y/youtube-icon-logo-05A29977FC-seeklogo.com.png" width="40" ></a>
+                  </div>
+              </div>
+          </div>
+      </div>
+</footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

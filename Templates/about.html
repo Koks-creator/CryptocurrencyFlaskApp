@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4 " >
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10" >
+            <div class="card p-2 text-center p-3 mb-2 bg-dark text-white">
+                <div align="left">
+                    <section>
+                        <h1>About page</h1>
+                        <br>
+                        <br>
+                        <article>
+                            <font size="e">
+                            CrCurrency is a simple website that contains basic information about crypto currency such as price, capitalisation, total volume, circuit.
+                            It's made with python and micro framework called <a href="https://pl.wikipedia.org/wiki/Flask_(framework)" target="_blank"><u>Flask</u></a> (<a href="https://flask.palletsprojects.com/en/1.1.x/" target="_blank"><u>here's the official website</u></a>).
+                            The styling is made with <a href="https://getbootstrap.com/" target="_blank"><u>Bootstrap</u></a>. Website also offers <a href="{{url_for('about_api')}}"><u>API service</u></a> that you can get
+                            by making account and requesting for api key <a href="{{url_for('api')}}"><u>here</u></a>.
+                            </font>
+                            <br>
+                            <br>
+                            <h2>But what cryptocurrency is?</h2>
+                                A cryptocurrency is a digital or virtual currency that is secured by cryptography, which makes it nearly impossible to counterfeit or double-spend.
+                            Many cryptocurrencies are decentralized networks based on <a href="https://www.bitcoinsuisse.com/fundamentals/what-is-blockchain?" target="_blank">blockchain</a> technology - a distributed ledger enforced by a disparate network of computers.
+                                A defining feature of cryptocurrencies is that they are generally not issued by any central authority, rendering them theoretically immune to government
+                                interference or manipulation.
+                            <br>
+                            <br>
+                            <h4>KEY TAKEAWAYS</h4>
+                            <ul>
+                                <li>A cryptocurrency is a new form of digital asset based on a network that is distributed across a large number of computers.
+                                    This decentralized structure allows them to exist outside the control of governments and central authorities.</li>
+                                <li>The word “cryptocurrency” is derived from the encryption techniques which are used to secure the network.</li>
+                                <li>Blockchains, which are organizational methods for ensuring the integrity of transactional data,
+                                    is an essential component of many cryptocurrencies.</li>
+                                <li>Many experts believe that blockchain and related technology will disrupt many industries, including finance and law. </li>
+                                <li>Cryptocurrencies face criticism for a number of reasons, including their use for illegal activities, exchange rate volatility,
+                                    and vulnerabilities of the infrastructure underlying them. However, they also have been praised for their portability,
+                                    divisibility, inflation resistance, and transparency.</li>
+                            </ul>
+                            <br>
+                            <h2>Understanding Cryptocurrencies</h2>
+                            Cryptocurrencies are systems that allow for the secure payments online which are denominated in terms of virtual "tokens",
+                            which are represented by ledger entries internal to the system. "Crypto" refers to the various encryption algorithms and cryptographic
+                            techniques that safeguard these entries, such as elliptical curve encryption, public-private key pairs, and hashing functions.
+                            <br>
+                            <br>
+                            <h2>Types of Cryptocurrency</h2>
+                            The first blockchain-based cryptocurrency was Bitcoin, which still remains the most popular and most valuable.
+                            Today, there are thousands of alternate cryptocurrencies with various functions and specifications.
+                            Some of these are clones or forks of <a href="{{ url_for('search', name='bitcoin') }}" target="_blank">Bitcoin</a>,
+                            while others are new currencies that were built from scratch.
+                            <br>
+                            <br>
+                            Bitcoin was launched in 2009 by an individual
+                            or group known by the pseudonym "<a href="https://en.wikipedia.org/wiki/Satoshi_Nakamoto" target="_blank">Satoshi Nakamoto</a>".
+                            ﻿As of Nov. 2019, there were over 18 million bitcoins in circulation with a total market value of around $146 billion.
+                            <br>
+                            <br>
+                            Some of the competing cryptocurrencies spawned by Bitcoin’s success, known as "altcoins," include Litecoin, Peercoin, and Namecoin,
+                            as well as Ethereum, Cardano, and EOS. Today, the aggregate value of all the cryptocurrencies in existence is around
+                            $214 billion—Bitcoin currently represents more than 68% of the total value.
+                            <br>
+                            <br>
+                            <font color="#D14031"><strong>Important: </strong></font>Some of the cryptography used in
+                            cryptocurrency today was originally developed for military applications. At one point,
+                            the government wanted to put controls on cryptography similar to the legal restrictions
+                            on weapons, but the right for civilians to use cryptography was secured on grounds of freedom of speech.
+                            <br>
+                            <br>
+                            Source: <a href="https://www.investopedia.com/terms/c/cryptocurrency.asp" target="_blank">https://www.investopedia.com/terms/c/cryptocurrency.asp</a>
+                            <br>
+                            <br>
+                            <h6>By the way - if you have found any bugs or you have ideas how to improve my website, just let me know - piotr.blaszczak2002@gmail.com - Thank you :)</h6>
+                        </article>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

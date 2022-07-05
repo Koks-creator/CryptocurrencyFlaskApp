@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<script type="text/javascript" src="{{cdn_js[0] | safe}}" integrity="sha384-ufR9RFnRs6lniiaFvtJziE0YeidtAgBRH6ux2oUItHw5WTvE1zuk9uzhUU/FJXDp" crossorigin="anonymous"></script>
+
+<div class="container mt-5 " >
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10" >
+            <div class="card p-2 text-center p-3 mb-2 bg-dark text-white">
+                <h1>Basic information chart</h1>
+                <br>
+                <h2>{{chart_title}}</h2>
+                    <br>
+                <form method="post" action="/courses/{{name}}/plot/g">
+                    <input class="btn btn-primary btn-lg" style="height:50px;font-size:14pt;width:137px;" type="submit" value="Price" name="btn">
+                    <input class="btn btn-primary btn-lg" style="height:50px;font-size:14pt;width:137px;" type="submit" value="Cap" name="btn">
+                    <input class="btn btn-primary btn-lg" style="height:50px;font-size:14pt;width:137px;" type="submit" value="Volume" name="btn">
+                    <input class="btn btn-primary btn-lg" style="height:50px;font-size:14pt;width:137px;" type="submit" value="Change" name="btn">
+                    <input class="btn btn-primary btn-lg" style="height:50px;font-size:14pt;width:137px;" type="submit" value="Circulation" name="btn">
+                </form>
+                <br>
+                <div align="center">
+                    {{script1 | safe}}
+                    {{div1 | safe}}
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<br>
+<br>
+
+<div class="container mt-5" >
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10" >
+            <div class="card p-2 text-center p-3 mb-2 bg-dark text-white">
+                <h1 ><font size="25">404</font></h1>
+                This page doesn't exists! You probably just typed cryptocurrency name that doesn't exists on this website.
+                Maybe this page is deleted or something. If you did everything right and there is no information about deleting this page
+                just let me know by mailing me piotr.blaszczak2002@gmail.com.
+                <br>
+                <br>
+                For now I offer you coming back to the <a href="{{url_for('courses')}}"><u>previous page</u></a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+
+
+{% endblock %}
