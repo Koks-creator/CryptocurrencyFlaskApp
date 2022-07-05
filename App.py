@@ -2,7 +2,6 @@ from flask import Flask, request, url_for, render_template, redirect, flash
 import json
 import requests
 from flask_sqlalchemy import SQLAlchemy
-from WebSiteForms import forms
 from flask_login import UserMixin
 from flask_bcrypt import Bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
@@ -18,6 +17,8 @@ from bokeh.transform import factor_cmap
 import secrets
 from PIL import Image
 import os
+
+import forms
 
 
 app = Flask(__name__, static_folder='<static folder path>')
